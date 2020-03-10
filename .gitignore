@@ -127,3 +127,10 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+.idea/$PRODUCT_WORKSPACE_FILE$
+.idea/.gitignore
+.idea/GeneticAlgorithm.iml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
