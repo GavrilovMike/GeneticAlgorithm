@@ -7,18 +7,18 @@ Find the global maximum for function: f(x) = x + 10sin(5x) + 7cos(4x)
 
 from math import sin, cos
 
-from gaft import GAEngine
-from gaft.components import BinaryIndividual
-from gaft.components import Population
-from gaft.operators import TournamentSelection
-from gaft.operators import UniformCrossover
-from gaft.operators import FlipBitMutation
+from gaft.gaft import GAEngine
+from gaft.gaft.components import BinaryIndividual
+from gaft.gaft.components import Population
+from gaft.gaft.operators import TournamentSelection
+from gaft.gaft.operators import UniformCrossover
+from gaft.gaft.operators import FlipBitMutation
 
 # Analysis plugin base class.
-from gaft.plugin_interfaces.analysis import OnTheFlyAnalysis
+from gaft.gaft.plugin_interfaces.analysis import OnTheFlyAnalysis
 
 # Built-in best fitness analysis.
-from gaft.analysis.fitness_store import FitnessStore
+from gaft.gaft.analysis.fitness_store import FitnessStore
 
 # Define population.
 indv_template = BinaryIndividual(ranges=[(0, 10)], eps=0.001)
@@ -36,6 +36,7 @@ engine = GAEngine(population=population, selection=selection,
 
 # Define fitness function.
 @engine.fitness_register
+@engine.minimize
 def fitness(indv):
     x, = indv.solution
     return x + 10*sin(5*x) + 7*cos(4*x)
@@ -48,7 +49,7 @@ class ConsoleOutputAnalysis(OnTheFlyAnalysis):
 
     def register_step(self, g, population, engine):
         best_indv = population.best_indv(engine.fitness)
-        msg = 'Generation: {}, best fitness: {:.3f}'.format(g, engine.ori_fmax)
+        msg = 'Generation: {}, best fitness: {:.3f}'.format(g, engine.ori_fmin)
         self.logger.info(msg)
 
     def finalize(self, population, engine):
