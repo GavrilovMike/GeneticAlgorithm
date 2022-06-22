@@ -1,5 +1,5 @@
 sphinx
 sphinxcontrib-argdoc
 pandas==0.22.0
-numpy==1.14.1
+numpy==1.22.0
 statsmodels==0.8.0
